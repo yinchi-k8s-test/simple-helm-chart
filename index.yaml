@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  simple-helm-chart:
+  - apiVersion: v2
+    created: "2024-10-15T17:41:37.621854258Z"
+    description: A simple generic Helm chart for a single-pod service
+    digest: 769a418b39685bc124139177561fb0a32a7fd7fb7016e97fde48759bd4d8186b
+    name: simple-helm-chart
+    urls:
+    - https://github.com/yinchi-k8s-test/simple-helm-chart/releases/download/simple-helm-chart-0.1.1/simple-helm-chart-0.1.1.tgz
+    version: 0.1.1
+generated: "2024-10-15T17:41:37.621859258Z"
