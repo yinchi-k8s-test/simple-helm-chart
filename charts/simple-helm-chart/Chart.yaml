@@ -1,0 +1,4 @@
+apiVersion: v2
+name: simple-helm-chart
+version: 0.1.0
+description: A simple generic Helm chart for a single-pod service
