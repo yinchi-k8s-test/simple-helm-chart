@@ -9,9 +9,9 @@ spec:
       app: {{ .Release.Name }}
   ports:
     {{- range .Values.service.ports }}
-    - protocol: {{ .protocol }}
+    - protocol: {{ .protocol | default "TCP" | quote }}
       port: {{ .port }}
-      targetPort: {{ .targetPort }}
+      targetPort: {{ .targetPort | default .port }}
       {{- if .nodePort }}
       nodePort: {{ .nodePort }}
       {{- end }}
