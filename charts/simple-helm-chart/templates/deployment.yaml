@@ -15,6 +15,17 @@ spec:
       labels:
         app: "{{ .Release.Name }}"
     spec:
+      volumes:
+      {{- if .Values.persistence.enabled }}
+        - name: "{{ .Release.Name }}-vol"
+          persistentVolumeClaim:
+            claimName: "{{ .Release.Name }}-pvc"
+      {{- end}}
+      {{- range .Values.configMapVols }}
+        - name: "{{ .name }}-cm-vol"
+          configMap:
+            name: "{{ .name }}-cm"
+      {{- end}}
       containers:
       - name: "{{ .Release.Name }}"
         image: "{{ .Values.image }}:{{ .Values.tag }}"
@@ -28,6 +39,15 @@ spec:
           - secretRef:
               name: {{ . }}
           {{- end }}
+        {{- end}}
+        volumeMounts:
+        {{- if .Values.persistence.enabled }}
+          - name: "{{ .Release.Name }}-vol"
+            mountPath: "{{ .Values.persistence.mountPath }}"
+        {{- end}}
+        {{- range .Values.configMapVols }}
+          - name: "{{ .name }}-cm-vol"
+            mountPath: "{{ .mountPath }}"
         {{- end}}
         ports:
           {{- range .Values.containerPorts }}

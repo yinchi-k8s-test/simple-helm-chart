@@ -28,13 +28,23 @@ service:
       targetPort: 80
       # nodePort: 32080
 
-# persistence:
-#   # Size of the persistent volume
-#   size: 5Gi
-#   # Path to the persistent volume on the Kubernetes node
-#   hostPath: /microk8s-data/test
+# If enabled, create and mount a persistent volume for read/write
+persistence:
+  enabled: false
+  # Size of the persistent volume
+  size: 5Gi
+  # Path to the persistent volume on the Kubernetes node
+  hostPath: /microk8s-data/test
+  mountPath: /mnt/test
+
+# Mount configMaps as directories
+configMapVols: []
+# configMapVols:
+  # - name: myconfigmap
+  #   mountPath: /etc/config
 
 traefik:
+  enabled: false
   # Prefix for the service in the Traefik proxy
   path: /test
   port: 8000
